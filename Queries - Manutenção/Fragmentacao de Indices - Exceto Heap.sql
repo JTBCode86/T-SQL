@@ -1,0 +1,17 @@
+/*=================================================
+	Descrição:
+		Localizar todos os indices exceto Heap
+===================================================*/
+
+SELECT 
+	OBJECT_SCHEMA_NAME(BASET.[OBJECT_ID],DB_ID()) AS [SCHEMA], 
+	BASET.[NAME] AS [TABLE_NAME], 
+	I.[NAME] AS [INDEX_NAME], 
+	AC.[NAME] AS [COLUMN_NAME], 
+	I.[TYPE_DESC]
+FROM SYS.[TABLES] AS BASET 
+ INNER JOIN SYS.[INDEXES] I ON BASET.[OBJECT_ID] = I.[OBJECT_ID] 
+ INNER JOIN SYS.[INDEX_COLUMNS] IC ON I.[OBJECT_ID] = IC.[OBJECT_ID] 
+ INNER JOIN SYS.[ALL_COLUMNS] AC ON BASET.[OBJECT_ID] = AC.[OBJECT_ID] AND IC.[COLUMN_ID] = AC.[COLUMN_ID] 
+WHERE BASET.[IS_MS_SHIPPED] = 0 AND I.[TYPE_DESC] <> 'HEAP'
+ORDER BY BASET.[NAME], I.[INDEX_ID], IC.[KEY_ORDINAL];	
