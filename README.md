@@ -1,4 +1,4 @@
-<b><i>**Bem vindos!**</i></b>
+<b><i>**Bem-vindo!**</i></b>
 ---
 
 <b>Scripts (T-SQL) Microsoft SQL Server uteis para o dia a dia:</b>
